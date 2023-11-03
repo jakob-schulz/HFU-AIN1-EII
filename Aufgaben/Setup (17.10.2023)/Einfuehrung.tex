@@ -1,0 +1,68 @@
+\documentclass[a4paper,11pt,titlepage]{article}
+
+\usepackage{ucs}
+% per input encoding kann man Umlaute direkt einsetzten, aber  dann ist man von Font des jeweiligen Rechners abh"angig. Daher mag ich es nicht!
+%\usepackage[utf8x]{inputenc}
+\usepackage[german,ngerman]{babel}
+\usepackage{fontenc}
+\usepackage[pdftex]{graphicx}
+%\usepackage{latexsym}
+
+\usepackage[pdftex]{hyperref}
+
+\begin{document}
+
+% hier aktuelle Uebungsnummer einfuegen
+\title{Einf\"uhrung in die Informatik\\
+Ausarbeitung \"Ubung 2}
+
+% Namen der Bearbeiter einfuegen
+
+\author{Jakob Schulz}
+
+% aktuelles Datum einfuegen
+
+\date{\today}
+
+\maketitle{\thispagestyle{plain}}
+
+\section{Darstellung von Umlauten}
+Die Darstellung von Umlauten erfolgt durch das Voranstellen von \textbackslash'' und dem betreffenden Selbstlaut oder nur durch das Voranstellen von '' und dem betreffenden Selbstlaut. \\
+Beispiel: \\ Aus \textbackslash'' a wird "a und aus ''a wird auch "a
+
+
+\section{Absätze}
+% hier dann die eigene Bearbeitung einfuegen
+Ein neuer Absatz kann durch \textbackslash \textbackslash ~oder durch \textbackslash newline gekennzeichnet werden.
+
+\section{Listen}
+% hier dann die eigene Bearbeitung einfuegen
+Nicht nummerierte Listen lassen sich durch \textbackslash begin itemize angeben und durch \textbackslash end itemize beenden.\\
+Nummerierte Listen lassen sich durch \textbackslash begin enumerate angeben und durch \textbackslash begin enumerate beenden.
+
+\section{Tabellen}
+Tabellen lassen sich mit \textbackslash begin \{ tabular\} \{\dots\} anlegen und mit \textbackslash end \{ tabular\} beenden.
+Hierbei wird eingesetzt, ob der Text in den Tabellen linksbündig (l), rechtsbündig (r) oder zentriert (c) ist. Der Befehl p\{breite\} gibt die Breite einer Spalte mit mehrzeiligem 
+Text an. \\
+Innerhalb der Tabelle kann man mit \& in die nächste Tabellenspalte springen.
+
+\section{Einfügen von Bildern}
+Um Bilder einzufügen muss zuerst im Vorspann des Dokuments das Paket graphicx eingefügt werden.\\
+Befehl: \textbackslash usepackage \{graphicx \} \\
+Mit \textbackslash includegraphics [width = \dots cm] \{ "`name" ' \} einfügen. \\
+Wichtig: Das Bild muss hierbei im selben Ordner wie die LaTeX- Datei sein.
+\\
+Beispiel: \newpage
+\includegraphics [width = 10 cm] {Aufgabe} \\
+
+% ---------
+\section{Resumee zur dieser "Ubungsaufgabe}
+Dauer f"ur 
+\begin{itemize}
+	\item Durchf"uhrung: Lässt sich nicht genau sagen, da Durchführung darin bestand die Dokumentation zu Verstehen
+	\item Dokumentation: ''
+\end{itemize}
+Probleme: Einarbeitung in bisher ungewohnte Umgebung und Verstehen der Syntax.
+Test f"ur github.
+
+\end{document}
