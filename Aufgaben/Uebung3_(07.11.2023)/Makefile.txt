@@ -1,0 +1,15 @@
+#Variablen
+Coption = -W -g
+
+#Regeln
+all: HeronV
+HeronV: HeronV.cpp
+        g++ HeronV.cpp $(Coption) -o HeronV
+        #Obiger Befehl auch ohne Variablen moeglich: g++ HeronV.cpp -W -g>
+ex: HeronV
+        ./HeronV
+db: HeronV
+        gdb HeronV
+rm: HeronV
+        rm HeronV
+        rm HeronV.o

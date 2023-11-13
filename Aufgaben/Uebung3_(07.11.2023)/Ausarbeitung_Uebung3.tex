@@ -1,0 +1,173 @@
+\documentclass[a4paper,11pt,titlepage]{article}
+
+\usepackage{ucs}
+% per input encoding kann man Umlaute direkt einsetzten, aber  dann ist man von Font des jeweiligen Rechners abh"angig. Daher mag ich es nicht!
+%\usepackage[utf8x]{inputenc}
+\usepackage[german,ngerman]{babel}
+\usepackage{fontenc}
+\usepackage[pdftex]{graphicx}
+%\usepackage{latexsym}
+\usepackage[pdftex]{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{codegreen}{rgb}{0,0.8,0}
+
+\lstdefinestyle{mystyle}{  
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+
+% hier aktuelle Uebungsnummer einfuegen
+\title{Einf\"uhrung in die Informatik\\
+Ausarbeitung \"Ubung 3}
+
+% Namen der Bearbeiter einfuegen
+
+\author{hier steht dann der oder die Namen(n)}
+
+% aktuelles Datum einfuegen
+
+\date{\today}
+
+\maketitle{\thispagestyle{plain}}
+
+\section{Compile und Debug}
+
+\subsection{Erstellen eines Programmes, welches euklidischen Algorithmus implementiert}
+Shell-Kommandos:
+\begin{verbatim}
+cd EII
+mkdir EuklidischerAlgorithmus
+cd EuklidischerAlgorithmus
+nano EuklidA.cpp
+\end{verbatim}
+Code:
+\begin{lstlisting}[language=c++]
+include<stdio.h>
+int main()
+{
+  int zahl1 = 132;
+  int zahl2 =28; 
+  int temp;
+  while(zahl2>0) 
+  {
+    temp = zahl1%zahl2; 
+    zahl1= zahl2;
+    zahl2= temp;
+  }
+  printf("Der ggT ist %i", zahl1);
+  return 0;
+}
+\end{lstlisting}
+Handbuch aufrufen:\\
+man gcc bzw. man g++\\
+\\
+Die meisten Terminalbefehle werden vom g++ Compiler als auch vom c++ Compiler akzeptiert und ausgef"uhrt. Wenn eine Befehl nur nützlich für c++ ist, wird dies im Handbuch expliziet erwähnt. Wenn eine Beschreibung des Befehls nicht eine spezielle Sprache erw"ahnt ist er f"ur beide Sprachen bzw. compiler geeignet.\\
+gcc ist der Compiler f"ur c-Programme und g++ ist der Compiler f"ur c++ Programme.\\
+Wichtitg ist, dass es sich bei beiden eigentlich nicht nur um den Compiler handelt. Beide enthalten einen Linker, welcher den compilierten Code zusammensetzt und aus diesem Code(Assemblercode) ausf"uhrbaren Maschinencode erzeugt. Des Weiteren besitzen beide einen Präprozesser (Schaut, welche Bibliotheken genutzt werden, ...). \\
+gdb ist ein Debugger. Er ist n"utzlich, um zu verstehen, was das Programm macht und wie es sich verh"allt. man kann also durch in in ein laufendes Programm hineinsehen.
+\newpage
+Durch ihn kann man:
+\begin{itemize}
+\item Das Programm an einer gewissen Stelle im Code stopen und danach weiter ausf"uhren
+\item Den Status des Programmes zum gestopten Zeitpunkt feststellen (Werte von Variablen\dots)
+\item Dinge im Programm "andern
+\end{itemize}
+\subsection{Terminalbefehle f"ur Compiler und debugger}
+Befehl:
+\begin{itemize}
+\item gcc -c, g++ -c \\
+Der Code wird kompiliert, aber noch nicht verlinkt (Linker wird nicht ausgef"uhrt). Es werden die Dateien, welche kompiliert wurden in Form von Objektdateien ausgegeben (Endung .o)\\
+Beispiel:  g++ EuklidA.cpp -c
+\item gcc -o "`Name"', g++ -o "`Name"'\\
+Es wird eine Datei (ausf"uhrbare Datei, Objektdatei, ...) mit dem Namen erzeugt\\
+Beispiel: g++ EuklidA.cpp -o test
+\item gcc -g, g++ -g\\
+F"ugt dem Maschinencode Debug Informationen hinzu. Diese werden im Format des Betriebssystems des Rechners hinzuge"ugt. Man kann den kompilierten Code sp"ater dann mit Hilfe enies Debuggers (bspw. GDB) debuggen.
+\item gcc -W, g++ -W
+Gibt vorhanden Warnungen aus. Falls der Code fehler enthält\\
+Beispiel: g++ EuklidA.cpp -W
+\end{itemize}
+Befehl zum Aufrufen des Debuggers:
+gdb "`Programmname"' \\
+Programm wird gedebugt und man kann verschiedene Befehle mit dem Debugger ausf"uhren (Normalerweise gibt man Debugger noch weitere Argumente mit)\\
+\\
+Befehle innerhalb des Debuggers:
+\begin{itemize}
+\item break "`Zeilennummer"'\\
+Setzt Breakpoint an einerbestimmten Zeile.  Wenn man dann Programm ausf"uhrt wird dieses an diser Zeile gestoppt.
+\item run\\
+Programm wiird ausgef"uhrt
+\item c\\
+Programm wird nach Breakpoint weiter ausgef"uhrt
+\item step\\
+N"achte Programmzeile wird ausgef"uhrt.
+\item delete "`Zahl"'\\
+Breakpoint bekommt eine Zahl zuegwiesen mit diesem Befehl kann man ihn l"oschen.\\
+\item print "`Variablenname"'\\
+Gibt den Wert der Variablen am Breakpoint aus.
+\end{itemize}
+\subsection{Ablauf einer Debug Session}
+Das Programm wird ausf"uhrbar gemacht und mit Informationen f"ur den Debugger versehen. Die ausf"uhrbare Datei wird mit dem Debugger ge"offnet. Mit dem Debugger k"onnen Breakpoints gesetzt und das Programm ausgef"uhrt werden. M"ogliche Fehler k"onnen im Editor der Wahl behoben werden. Danach muss Programm wieder mit Compiler ausf"uhrbar gemacht werden. Diese ausf"uhrbare Datei kann wieder mit dem Debugger gestartet werden.
+%Nachfragen: Unterschied compile-assemble -> siehe Bildschirmfoto
+
+\section{Build}
+\subsection{make}
+Mithilfe von make kann man automatisch Änderungen eines Programmmes kompilieren bzw. mit wenigen Befehlen das Programm ausf"uhren und debuggen. Es ist aber auch n"utzlich wenn manche Dateien automatisch geupdatet werden m"ussen. Um den make Befehl nutzen zu k"onnen muss man ein makefile erstellen. Dieses beschreibt die Beziehung zwischen den Dateien die geupdatet werden m"ussen und die Befehle f"ur die Aktualisierung der einzelnen Dateien. Durch den make Befehl werden dann f"ur alle Dateien/ Programme, die "Anderungen enthalten, entsprechende Befehle ausgef"uhrt.\\
+$\Rightarrow$ make ist vor allem bei komplexen Projekten hilfreich, da in diesen viele Dateien komiopiliert werden m"ussen und dies durch make automatisiert werden kann. Zudem wird "uberpr"uft, ob alle oder nur bestimmte Dateien kompiliert werden m"ussen.
+Ein makefile kann Variablen enthalten, welche innerhalb des Makefiles verwendet werden k"onnen. Dar"uber hinaus enth"alt ein makefile Regeln, die angeben, welche Dateien erstellt werden sollen und welche Abh"angigkeiten die Dateien haben.\newpage \noindent Verwendetes Programm: Heron Verfahren\\
+Vorgehen: Im selben Verzeichnis wie das Programm ein makefile erstellen.\\
+\\
+nano makefile\\
+Name "`makefile"', weil make sucht expliziet nach dem Dateinamen makefile.\\
+\\
+Makefile aufsetzen:
+\lstinputlisting[language=make]{Makefile.txt}
+Man kann in einem makefile Variablen definieren, die dann verwendet werden k"onnen $\Rightarrow$ spart Schreibarbeit\\
+Vor dem Doppelpunkt steht der Name der Regel. Dahinter welche Dateien ben"otigt werden (hier immer nur eine). Darunter steht (mit Einschub!) der Terminalbefehl, der dann ausgef"uhrt wird\\
+all: wird verwendet, wenn man nur make aufruft (Defaultaufruf)\\
+Die einzelnen Befehle kann man mit make "`Befehl"' aufrufen\\
+Beispiel: make db
+\subsection{cmake}
+\subsubsection{Unterschied zwischen make und cmake}
+cmake ist ein System, welches "ahnlich wie makefiles funktioniert, jedoch platformunabh"angig ist.\\ 
+Alles beginnt mit einer CMakeLists.txt Datei. In dieser kann man Anweisungen und Regeln schreiben, wie ein Projekt geupdatet, kompiliert und/oder ausgef"uhrt werden soll. Diese Datei kann dann in verschiedene Build-Systeme umgewandelt (bspw. makefiles). Diese k"onnen dann auf den jeweiligen Plattformen ausgef"uhrt werden und die Regeln und Anweisungen der CMakeLists.txt umsetzen. 
+\begin{itemize}
+\item Cmake\\
+Plattformunabh"angig auf einfache/schnelle Weise Code, updaten, ausf"hrbar machen, debuggen, ... (buildsystems f"uhr verschiedene Plattformen)
+\item make\\
+Code auf Linux auf einfache/schnelle Weise, updaten, ausf"uhrbar machen, debuggen, ...(buildsystem von Linux)
+\end{itemize}
+CMakeList.txt erstellen: nano CMakeLists.txt\\
+Code:
+\lstinputlisting[language=make]{CMakeLists.txt}
+Weitere Terminalbefehle:
+mkdir build\\
+Um ausf"uhrbaren Code nicht mit Quellcode zu verwechseln Vorallem hilfreich bei komplexen Programmen\\
+cd build\\
+cmake ../\\
+Die CmakeLists.txt aus dem "ubergeordnetem Verzeichnis wird aufgerufen. Und es wird in dem erstellten build Ortner eine Makefile Datei und weitere wichtige Dateien f"ur Cmake erstellt\\
+\subsubsection{Was macht PHONY-target clean}
+.phony sorgt daf"ur, dass der Befehl clean ausgef"uhrt wird und make nicht nach einer Datei namens clean sucht und diese versucht ausf"uhrbar zu machen.
+Das Phony target clean sollte die Makefile2-Datei im CMakeFiles Odrner bereinigen.
+\subsubsection{Pr"ufen der Funktionserf"ullung}
+Die Funktionserf"ulung wurde "uberpr"uft, indem die Makefile Datei mit dem Befehl make ausgef"uhrt wurde.\\
+Es entsteht eine ausf"uhrbares Programm, welches man mit dem Terminalbefehl  ./"`Dateiname"' (hier: ./HeronV) ausf"uhren kann.\\
+Durch einsetzen von Testwerten kann man erkennen, dass das Prgramm das macht, was es soll.
+
+\end{document}
