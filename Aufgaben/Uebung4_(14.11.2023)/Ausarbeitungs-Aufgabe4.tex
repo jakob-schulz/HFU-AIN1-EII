@@ -8,27 +8,38 @@
 \usepackage[pdftex]{graphicx}
 %\usepackage{latexsym}
 \usepackage[pdftex]{hyperref}
-\usepackage{listings}
 \usepackage{xcolor}
-\definecolor{codegreen}{rgb}{0,0.8,0}
+\usepackage{listings}
 
-\lstdefinestyle{mystyle}{  
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{blue},
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
+
+\definecolor{dunkelblau}{RGB}{16, 55, 188}
+\definecolor{orange}{RGB}{255, 60, 0}
+\definecolor{gruen}{RGB}{18, 118, 34}
+\definecolor{gelb}{RGB}{255, 200, 0}
+\definecolor{lila}{RGB}{147, 18, 114}
+
+\lstdefinestyle{python}{
+language=python,
+commentstyle=\color{gruen}, 
+keywordstyle =\color{dunkelblau}, 
+stringstyle=\color{orange},
+literate=
+    {\{}{{\textcolor{gelb}{\{}}}1
+    {\}}{{\textcolor{gelb}{\}}}}1
+    {[}{{\textcolor{lila}{[}}}1
+    {]}{{\textcolor{lila}{]}}}1,
+%Bis hier hin Farbgebung
+breaklines=true, %Zeilenumbruch
+frame=single, % Umrandung des Codes
+rulecolor=\color{lightgray},
+numbers=left, % Nummerierung hinzufügen (links)
+numberstyle=\tiny, % Stil der Zeilennummern
+stepnumber=1, % Schrittzahl für die Nummerierung
+numbersep=5pt, % Abstand zwischen Nummerierung und Code
+basicstyle=\sffamily, % Ändert die Schriftart des Codes
+tabsize = 4, %Tab-Abstand
+showstringspaces=false
 }
-
-\lstset{style=mystyle}
 
 \begin{document}
 
@@ -38,7 +49,7 @@ Ausarbeitung \"Ubung 4}
 
 % Namen der Bearbeiter einfuegen
 
-\author{Jakob Schulz)}
+\author{Jakob Schulz}
 
 % aktuelles Datum einfuegen
 
@@ -165,7 +176,7 @@ Installation von NumPy mittels pip:
 Befehl: 
 \begin{verbatim}nano uebung4Grafik.py\end{verbatim}
 Programm:\\
-\lstinputlisting[language=python]{Grafik.py}
+\lstinputlisting[style=python]{Grafik.py}
 \subsection{Erstellen von requirements.txt}
 Dient dazu, eine konsistente Entwicklungsumgebung zu erstellen, in dem die genauen Versionen der Python Pakete darin festgelegt sind.
 Andere Entwickler k"onnen dadurch schnell an Projekt weiterarbeiten, da sie leicht die gleichen Pakete herunterladen k"onnen.\\
