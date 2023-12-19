@@ -1,0 +1,111 @@
+Uebung 1 (24.10.2023)
+Jakob Schulz
+                                                                              
+Aufgabe 1
+
+Befehle:
+mkdir EII --> Erstellt einen neuen Ornder namens EII
+cd EII --> In den Ordner reingehen
+nano Uebung1.txt    -->	 Erstellt eine neue Textdatei,
+			 welche mit dem Texteditor nano geoeffnet wird
+Wichtig: Steuerung S zum Speichern des Textes
+	 Steuerung X zum verlassen des Editors	
+
+Aufgabe 2
+
+
+2.1
+Befehl:
+
+ls      Zeigt, Ordner und Dokumente des Verzeichnisses in alphabetischer 
+	Reihenfolge bzw. kann auch verwendet werden um Dokumente mit
+	bestimmten Eigenschaften zu listen (bsp. ls /bin | grep set)
+ls -t   Zeigt  Dateien nach Aenderungsdatum aufsteigend an
+	(kuerzlich geaendertes zuerst)
+	--> Persoenlich finde ich, dass es im Terminal sehr schnell
+	    unuebersichtlich wird, wo man sich gerade befindet und 
+	    welche Dateien der Ornder beeinhaltet. Dieser Befehl hilft
+	    mir den Ueberblick zu behalten und zeigt zudem, wie praesent 
+	    die Dokumente in dem Ordner sind. Unter praesent verstehe ich, 
+	    dass der Befehl mir die kuerzlich geaenderten Dokumente
+	    anzeigt. Als die, mit denen ich auch gerade arbeite
+	    und benoetige. 
+ls -l   Zeigt den Autor der Dateien
+
+ps      Zeigt einen Ausschnitt der laufenden Prozesse des Rechners
+ps -e   Zeigt alle laufenden Prozesse
+ps -eM  Zeigt Sicherheitsprozesse an
+
+wc      Gibt Anzahl der AbsÃ¤tze, Woerter und Zeichen an.
+wc -w   Zeigt Anzahl der Woerter an
+wc -m   Zeigt Anzahl der Zeichen an
+
+du      Ermittelt den belegten Speicherplatz
+du -a   Gibt belegten Speicherplatz der Dateien im Verzeichnes an
+	--> Ist hilfreich, wenn man bspw. auf einen Stick oder auf eine                  
+            Cloud etwas kopieren moechte, man aber nur begrenzten 
+            Speicherplatz zur VerfÃ¼gung hat. Durch den Befehl kann man         
+            schnell sehen, welche Datei im Verzeichnis wie viel               
+            Speicherplatz belegt
+du -c   Rechnet den belegten Speicherplatz des Verzeichnisses zusammen 
+
+file    Bestimmt den Dateityp einer Datei im Verzeichnis
+file -b Bestimmt nur den Dateityp einer Datei im Verzeichnis
+	(kuerzere Ausgabe als file)
+file -i Gibt Dateityp in anderer Schreibweise an
+
+grep 'Muster' Dateiname         Durchsucht Datei nach Mustern, die dem      
+				gesuchten entsprechen.
+                                Durch die Verwendung von regulaeren
+				Ausdruecken.
+                                Gefundene Muster werden zeilenweise 
+				ausgegeben.
+grep -c 'Muster' Dateiname      Gibt die Anzahl der gefunden Muster aus.
+grep -v 'Muster' Dateiname      Gibt alle Zeilen aus, die das gesuchte Muster
+				nicht enhalten.
+Wichtig: Wenn man regulaere AusdrÃ¼cke verwendet, dann ist  standardgemÃ¤ÃŸ
+	 basic regular expression eingestellt. Das bedeutet, um bspw. das
+	 "oder" (|) zu verwenden muss man (\|) schreiben
+
+cat Dateiname Dateiname         Verkettet mehrere Dateien und gibt diese aus.
+cat -n Dateiname Dateiname      Gibt Dateien verkettet aus und nummeriert
+				die Zeilen
+cat -b Dateiname Dateiname      Gibt Dateien verkettet aus und nummerert nur 
+				die Zeilen mit Inhalt
+				 (leere Zeilen werden nicht nummeriert)
+--> cat Kommando kann man auch mit nur einer Datei verwenden
+
+
+2.2
+Befehl:
+ls /bin | grep set      Befehl listet alle Dokumente des Ordners 'bin' auf,
+			welche die Buchstaben "Set" im Dateinamen haben. 
+			Dieser Ordner enthÃ¤lt alle installierten Pakete und 
+			Anwendungen wie bsp. den g++ Compiler, aber auch
+			Firefox und weitere.
+
+
+2.3
+Befehle:
+
+cd /usr/local/bin
+sudo nano largefiles.sh         Erstellen der Bash Datei in einem "$Path"
+				Verzeichnis.
+                                Grund: Nur wenn Skript in einem Path
+				Verzeichnis ist, kann es aus jedem Verzeichnis
+				gefunden und ausgefuehrt werden. Endung sh,
+				weil Bash Datei
+
+Inhalt Bash Datei:
+#!/bin/bash			Gibt an, welcher Interpreter verwendet 
+				werden soll
+find -type f -size +500k        Befehl wird ausgefuehrt und gibt die
+				Dateinamen aller Dateien aus, die groeÃŸer
+				als 500kB  sind. type f bestimmt 
+				hierbei, dass nur Dateien bzw. Dateien in
+				Ordnern angegebem werden. (f steht für file)
+Nach speichern des Skripts  muss es noch ausfuehrbar gemacht werden.
+
+chmod +x largefiles.sh          Macht Skript ausfuehrbar
+
+Skript laesst sich dann mit largefiles.sh aufrufen
